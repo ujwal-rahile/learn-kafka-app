@@ -14,10 +14,10 @@ import org.apache.avro.message.SchemaStore;
 
 @org.apache.avro.specific.AvroGenerated
 public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase implements org.apache.avro.specific.SpecificRecord {
-  private static final long serialVersionUID = -5367452115686545176L;
+  private static final long serialVersionUID = 5313843576038605383L;
 
 
-  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MigrationEvent\",\"namespace\":\"com.kafka.avro\",\"fields\":[{\"name\":\"source\",\"type\":\"string\"},{\"name\":\"target\",\"type\":\"string\"},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"MigrationData\",\"fields\":[{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"fruits\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Fruit\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"color\",\"type\":\"string\"}]}}}]}}]}");
+  public static final org.apache.avro.Schema SCHEMA$ = new org.apache.avro.Schema.Parser().parse("{\"type\":\"record\",\"name\":\"MigrationEvent\",\"namespace\":\"com.kafka.avro\",\"fields\":[{\"name\":\"eventId\",\"type\":[\"null\",\"string\"],\"default\":null},{\"name\":\"source\",\"type\":\"string\"},{\"name\":\"target\",\"type\":\"string\"},{\"name\":\"data\",\"type\":{\"type\":\"record\",\"name\":\"MigrationData\",\"fields\":[{\"name\":\"type\",\"type\":\"string\"},{\"name\":\"fruits\",\"type\":{\"type\":\"array\",\"items\":{\"type\":\"record\",\"name\":\"Fruit\",\"fields\":[{\"name\":\"name\",\"type\":\"string\"},{\"name\":\"color\",\"type\":\"string\"}]}}}]}}]}");
   public static org.apache.avro.Schema getClassSchema() { return SCHEMA$; }
 
   private static final SpecificData MODEL$ = new SpecificData();
@@ -73,6 +73,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
     return DECODER.decode(b);
   }
 
+  private java.lang.CharSequence eventId;
   private java.lang.CharSequence source;
   private java.lang.CharSequence target;
   private com.kafka.avro.MigrationData data;
@@ -86,11 +87,13 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
 
   /**
    * All-args constructor.
+   * @param eventId The new value for eventId
    * @param source The new value for source
    * @param target The new value for target
    * @param data The new value for data
    */
-  public MigrationEvent(java.lang.CharSequence source, java.lang.CharSequence target, com.kafka.avro.MigrationData data) {
+  public MigrationEvent(java.lang.CharSequence eventId, java.lang.CharSequence source, java.lang.CharSequence target, com.kafka.avro.MigrationData data) {
+    this.eventId = eventId;
     this.source = source;
     this.target = target;
     this.data = data;
@@ -106,9 +109,10 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
   @Override
   public java.lang.Object get(int field$) {
     switch (field$) {
-    case 0: return source;
-    case 1: return target;
-    case 2: return data;
+    case 0: return eventId;
+    case 1: return source;
+    case 2: return target;
+    case 3: return data;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
   }
@@ -118,11 +122,29 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
   @SuppressWarnings(value="unchecked")
   public void put(int field$, java.lang.Object value$) {
     switch (field$) {
-    case 0: source = (java.lang.CharSequence)value$; break;
-    case 1: target = (java.lang.CharSequence)value$; break;
-    case 2: data = (com.kafka.avro.MigrationData)value$; break;
+    case 0: eventId = (java.lang.CharSequence)value$; break;
+    case 1: source = (java.lang.CharSequence)value$; break;
+    case 2: target = (java.lang.CharSequence)value$; break;
+    case 3: data = (com.kafka.avro.MigrationData)value$; break;
     default: throw new IndexOutOfBoundsException("Invalid index: " + field$);
     }
+  }
+
+  /**
+   * Gets the value of the 'eventId' field.
+   * @return The value of the 'eventId' field.
+   */
+  public java.lang.CharSequence getEventId() {
+    return eventId;
+  }
+
+
+  /**
+   * Sets the value of the 'eventId' field.
+   * @param value the value to set.
+   */
+  public void setEventId(java.lang.CharSequence value) {
+    this.eventId = value;
   }
 
   /**
@@ -217,6 +239,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
   public static class Builder extends org.apache.avro.specific.SpecificRecordBuilderBase<MigrationEvent>
     implements org.apache.avro.data.RecordBuilder<MigrationEvent> {
 
+    private java.lang.CharSequence eventId;
     private java.lang.CharSequence source;
     private java.lang.CharSequence target;
     private com.kafka.avro.MigrationData data;
@@ -233,17 +256,21 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
      */
     private Builder(com.kafka.avro.MigrationEvent.Builder other) {
       super(other);
-      if (isValidValue(fields()[0], other.source)) {
-        this.source = data().deepCopy(fields()[0].schema(), other.source);
+      if (isValidValue(fields()[0], other.eventId)) {
+        this.eventId = data().deepCopy(fields()[0].schema(), other.eventId);
         fieldSetFlags()[0] = other.fieldSetFlags()[0];
       }
-      if (isValidValue(fields()[1], other.target)) {
-        this.target = data().deepCopy(fields()[1].schema(), other.target);
+      if (isValidValue(fields()[1], other.source)) {
+        this.source = data().deepCopy(fields()[1].schema(), other.source);
         fieldSetFlags()[1] = other.fieldSetFlags()[1];
       }
-      if (isValidValue(fields()[2], other.data)) {
-        this.data = data().deepCopy(fields()[2].schema(), other.data);
+      if (isValidValue(fields()[2], other.target)) {
+        this.target = data().deepCopy(fields()[2].schema(), other.target);
         fieldSetFlags()[2] = other.fieldSetFlags()[2];
+      }
+      if (isValidValue(fields()[3], other.data)) {
+        this.data = data().deepCopy(fields()[3].schema(), other.data);
+        fieldSetFlags()[3] = other.fieldSetFlags()[3];
       }
       if (other.hasDataBuilder()) {
         this.dataBuilder = com.kafka.avro.MigrationData.newBuilder(other.getDataBuilder());
@@ -256,19 +283,63 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
      */
     private Builder(com.kafka.avro.MigrationEvent other) {
       super(SCHEMA$, MODEL$);
-      if (isValidValue(fields()[0], other.source)) {
-        this.source = data().deepCopy(fields()[0].schema(), other.source);
+      if (isValidValue(fields()[0], other.eventId)) {
+        this.eventId = data().deepCopy(fields()[0].schema(), other.eventId);
         fieldSetFlags()[0] = true;
       }
-      if (isValidValue(fields()[1], other.target)) {
-        this.target = data().deepCopy(fields()[1].schema(), other.target);
+      if (isValidValue(fields()[1], other.source)) {
+        this.source = data().deepCopy(fields()[1].schema(), other.source);
         fieldSetFlags()[1] = true;
       }
-      if (isValidValue(fields()[2], other.data)) {
-        this.data = data().deepCopy(fields()[2].schema(), other.data);
+      if (isValidValue(fields()[2], other.target)) {
+        this.target = data().deepCopy(fields()[2].schema(), other.target);
         fieldSetFlags()[2] = true;
       }
+      if (isValidValue(fields()[3], other.data)) {
+        this.data = data().deepCopy(fields()[3].schema(), other.data);
+        fieldSetFlags()[3] = true;
+      }
       this.dataBuilder = null;
+    }
+
+    /**
+      * Gets the value of the 'eventId' field.
+      * @return The value.
+      */
+    public java.lang.CharSequence getEventId() {
+      return eventId;
+    }
+
+
+    /**
+      * Sets the value of the 'eventId' field.
+      * @param value The value of 'eventId'.
+      * @return This builder.
+      */
+    public com.kafka.avro.MigrationEvent.Builder setEventId(java.lang.CharSequence value) {
+      validate(fields()[0], value);
+      this.eventId = value;
+      fieldSetFlags()[0] = true;
+      return this;
+    }
+
+    /**
+      * Checks whether the 'eventId' field has been set.
+      * @return True if the 'eventId' field has been set, false otherwise.
+      */
+    public boolean hasEventId() {
+      return fieldSetFlags()[0];
+    }
+
+
+    /**
+      * Clears the value of the 'eventId' field.
+      * @return This builder.
+      */
+    public com.kafka.avro.MigrationEvent.Builder clearEventId() {
+      eventId = null;
+      fieldSetFlags()[0] = false;
+      return this;
     }
 
     /**
@@ -286,9 +357,9 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return This builder.
       */
     public com.kafka.avro.MigrationEvent.Builder setSource(java.lang.CharSequence value) {
-      validate(fields()[0], value);
+      validate(fields()[1], value);
       this.source = value;
-      fieldSetFlags()[0] = true;
+      fieldSetFlags()[1] = true;
       return this;
     }
 
@@ -297,7 +368,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return True if the 'source' field has been set, false otherwise.
       */
     public boolean hasSource() {
-      return fieldSetFlags()[0];
+      return fieldSetFlags()[1];
     }
 
 
@@ -307,7 +378,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       */
     public com.kafka.avro.MigrationEvent.Builder clearSource() {
       source = null;
-      fieldSetFlags()[0] = false;
+      fieldSetFlags()[1] = false;
       return this;
     }
 
@@ -326,9 +397,9 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return This builder.
       */
     public com.kafka.avro.MigrationEvent.Builder setTarget(java.lang.CharSequence value) {
-      validate(fields()[1], value);
+      validate(fields()[2], value);
       this.target = value;
-      fieldSetFlags()[1] = true;
+      fieldSetFlags()[2] = true;
       return this;
     }
 
@@ -337,7 +408,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return True if the 'target' field has been set, false otherwise.
       */
     public boolean hasTarget() {
-      return fieldSetFlags()[1];
+      return fieldSetFlags()[2];
     }
 
 
@@ -347,7 +418,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       */
     public com.kafka.avro.MigrationEvent.Builder clearTarget() {
       target = null;
-      fieldSetFlags()[1] = false;
+      fieldSetFlags()[2] = false;
       return this;
     }
 
@@ -366,10 +437,10 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return This builder.
       */
     public com.kafka.avro.MigrationEvent.Builder setData(com.kafka.avro.MigrationData value) {
-      validate(fields()[2], value);
+      validate(fields()[3], value);
       this.dataBuilder = null;
       this.data = value;
-      fieldSetFlags()[2] = true;
+      fieldSetFlags()[3] = true;
       return this;
     }
 
@@ -378,7 +449,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       * @return True if the 'data' field has been set, false otherwise.
       */
     public boolean hasData() {
-      return fieldSetFlags()[2];
+      return fieldSetFlags()[3];
     }
 
     /**
@@ -423,7 +494,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
     public com.kafka.avro.MigrationEvent.Builder clearData() {
       data = null;
       dataBuilder = null;
-      fieldSetFlags()[2] = false;
+      fieldSetFlags()[3] = false;
       return this;
     }
 
@@ -432,8 +503,9 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
     public MigrationEvent build() {
       try {
         MigrationEvent record = new MigrationEvent();
-        record.source = fieldSetFlags()[0] ? this.source : (java.lang.CharSequence) defaultValue(fields()[0]);
-        record.target = fieldSetFlags()[1] ? this.target : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.eventId = fieldSetFlags()[0] ? this.eventId : (java.lang.CharSequence) defaultValue(fields()[0]);
+        record.source = fieldSetFlags()[1] ? this.source : (java.lang.CharSequence) defaultValue(fields()[1]);
+        record.target = fieldSetFlags()[2] ? this.target : (java.lang.CharSequence) defaultValue(fields()[2]);
         if (dataBuilder != null) {
           try {
             record.data = this.dataBuilder.build();
@@ -442,7 +514,7 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
             throw e;
           }
         } else {
-          record.data = fieldSetFlags()[2] ? this.data : (com.kafka.avro.MigrationData) defaultValue(fields()[2]);
+          record.data = fieldSetFlags()[3] ? this.data : (com.kafka.avro.MigrationData) defaultValue(fields()[3]);
         }
         return record;
       } catch (org.apache.avro.AvroMissingFieldException e) {
@@ -476,6 +548,14 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
   @Override public void customEncode(org.apache.avro.io.Encoder out)
     throws java.io.IOException
   {
+    if (this.eventId == null) {
+      out.writeIndex(0);
+      out.writeNull();
+    } else {
+      out.writeIndex(1);
+      out.writeString(this.eventId);
+    }
+
     out.writeString(this.source);
 
     out.writeString(this.target);
@@ -489,6 +569,13 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
   {
     org.apache.avro.Schema.Field[] fieldOrder = in.readFieldOrderIfDiff();
     if (fieldOrder == null) {
+      if (in.readIndex() != 1) {
+        in.readNull();
+        this.eventId = null;
+      } else {
+        this.eventId = in.readString(this.eventId instanceof Utf8 ? (Utf8)this.eventId : null);
+      }
+
       this.source = in.readString(this.source instanceof Utf8 ? (Utf8)this.source : null);
 
       this.target = in.readString(this.target instanceof Utf8 ? (Utf8)this.target : null);
@@ -499,17 +586,26 @@ public class MigrationEvent extends org.apache.avro.specific.SpecificRecordBase 
       this.data.customDecode(in);
 
     } else {
-      for (int i = 0; i < 3; i++) {
+      for (int i = 0; i < 4; i++) {
         switch (fieldOrder[i].pos()) {
         case 0:
-          this.source = in.readString(this.source instanceof Utf8 ? (Utf8)this.source : null);
+          if (in.readIndex() != 1) {
+            in.readNull();
+            this.eventId = null;
+          } else {
+            this.eventId = in.readString(this.eventId instanceof Utf8 ? (Utf8)this.eventId : null);
+          }
           break;
 
         case 1:
-          this.target = in.readString(this.target instanceof Utf8 ? (Utf8)this.target : null);
+          this.source = in.readString(this.source instanceof Utf8 ? (Utf8)this.source : null);
           break;
 
         case 2:
+          this.target = in.readString(this.target instanceof Utf8 ? (Utf8)this.target : null);
+          break;
+
+        case 3:
           if (this.data == null) {
             this.data = new com.kafka.avro.MigrationData();
           }

@@ -33,6 +33,7 @@ public class EventController {
 
     @PostMapping("/publish/migration")
     public ResponseEntity<?> publishMigration(@RequestBody MigrationEvent message) {
+        message.setEventId(java.util.UUID.randomUUID().toString());
         try {
             publisher.sendMessageToTopic(message, migrationTopic);
             return ResponseEntity.ok("Message published to Migration successfully ..");

@@ -3,6 +3,7 @@
   "name": "MigrationEvent",
   "namespace": "com.kafka.avro",
   "fields": [
+    { "name": "eventId", "type": ["null", "string"], "default": null },
     { "name": "source", "type": "string" },
     { "name": "target", "type": "string" },
     {

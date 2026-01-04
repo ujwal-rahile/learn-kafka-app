@@ -16,11 +16,28 @@ public class EventController {
     @Autowired
     private KafkaMessagePublisher publisher;
 
-    @GetMapping("/publish/{message}")
-    public ResponseEntity<?> publishMessage(@PathVariable String message) {
+    @org.springframework.beans.factory.annotation.Value("${app.topic.fallout}")
+    private String falloutTopic;
+
+    @org.springframework.beans.factory.annotation.Value("${app.topic.migration}")
+    private String migrationTopic;
+
+    @GetMapping("/publish/fallout/{message}")
+    public ResponseEntity<?> publishFallout(@PathVariable String message) {
         try {
-            publisher.sendMessageToTopic(message);
-            return ResponseEntity.ok("Message published successfully ..");
+            publisher.sendMessageToTopic(message, falloutTopic);
+            return ResponseEntity.ok("Message published to Fallout successfully ..");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error posting message: " + ex.getMessage());
+        }
+    }
+
+    @GetMapping("/publish/migration/{message}")
+    public ResponseEntity<?> publishMigration(@PathVariable String message) {
+        try {
+            publisher.sendMessageToTopic(message, migrationTopic);
+            return ResponseEntity.ok("Message published to Migration successfully ..");
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Error posting message: " + ex.getMessage());

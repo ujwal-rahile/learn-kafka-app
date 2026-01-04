@@ -1,0 +1,33 @@
+{
+  "type": "record",
+  "name": "MigrationEvent",
+  "namespace": "com.kafka.avro",
+  "fields": [
+    { "name": "source", "type": "string" },
+    { "name": "target", "type": "string" },
+    {
+      "name": "data",
+      "type": {
+        "type": "record",
+        "name": "MigrationData",
+        "fields": [
+          { "name": "type", "type": "string" },
+          {
+            "name": "fruits",
+            "type": {
+              "type": "array",
+              "items": {
+                "type": "record",
+                "name": "Fruit",
+                "fields": [
+                  { "name": "name", "type": "string" },
+                  { "name": "color", "type": "string" }
+                ]
+              }
+            }
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -12,7 +12,7 @@ public class KafkaMessagePublisher {
     @Autowired
     private KafkaTemplate<String, Object> template;
 
-    public void sendMessageToTopic(String message, String topicName) {
+    public void sendMessageToTopic(Object message, String topicName) {
         CompletableFuture<SendResult<String, Object>> future = template.send(topicName, message);
         future.whenComplete((result, ex) -> {
             if (ex == null) {
